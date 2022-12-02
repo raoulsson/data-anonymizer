@@ -1,17 +1,23 @@
 from .city import City
+from .company import Company
+from .currency import Currency
 from .custom import Custom
 from .custom_address import CustomAddress
 from .custom_name import CustomName
 from .date_time import DateTimeField
 from .email_address import EmailAddress
+from .file_name import FileName
 from .first_name import FirstName
 from .float_range import FloatRange
 from .full_address import FullAddress
 from .full_name import FullName
+from .iban import IBAN
 from .int_range import IntRange
+from .job import Job
 from .last_name import LastName
 from .normal_int import NormalInt
 from .options import Options
+from .phone_number import PhoneNumber
 from .safe_harbor_age import SafeHarborAge
 from .ssn import SSN
 from .street_address import StreetAddress
@@ -38,6 +44,12 @@ class FieldTypeFactory:
         'ssn': SSN,
         'street_address': StreetAddress,
         'zip': Zip,
+        'company': Company,
+        'job': Job,
+        'currency': Currency,
+        'iban': IBAN,
+        'phone_number': PhoneNumber,
+        'file_name': FileName,
     }
 
     @staticmethod

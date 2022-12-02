@@ -339,3 +339,47 @@ Generate a real-sounding street address.
 Generate a valid-looking ZIP code.
 
 ---
+
+### company
+
+Generate a company name (standard provider from Faker lib)
+
+---
+
+### job
+
+Generate a job title (standard provider from Faker lib)
+
+---
+
+### currency
+
+Generate a currency three-letter symbol (standard provider from Faker lib)
+
+---
+
+### iban
+
+Generate an IBAN (standard provider from Faker lib)
+
+---
+
+### phone_number
+
+Generate a phone number (standard provider from Faker lib)
+
+---
+
+### file_name
+
+Generate a file name with extension (standard provider from Faker lib)
+
+---
+
+### Encoding
+
+Note that most values are created based on the encoding. Default is en_US. Currently, you have to call, e.g.:
+
+    FakerSingleton(locale=['fr_CH'])
+
+before the app is invoked. (Not tested)

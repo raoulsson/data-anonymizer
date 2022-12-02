@@ -33,14 +33,14 @@ class FakerSingleton:
     and instantiating Faker is expensive (~0.02 seconds)
     """
     class __FakerSingleton:
-        def __init__(self):
-            self.faker = faker.Faker()
+        def __init__(self, *args, **kwargs):
+            self.faker = faker.Faker(*args, **kwargs)
 
     instance = None
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         if not FakerSingleton.instance:
-            FakerSingleton.instance = FakerSingleton.__FakerSingleton()
+            FakerSingleton.instance = FakerSingleton.__FakerSingleton(*args, **kwargs)
 
     def __getattr__(self, item):
         return getattr(self.instance.faker, item)
