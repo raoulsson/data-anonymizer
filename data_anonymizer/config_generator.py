@@ -5,11 +5,11 @@ from .config import Config
 import logging
 
 
-def generate_yaml_config(data_file, has_header, delimiter):
+def generate_yaml_config(data_file, has_header, delimiter, enableOptions=True):
     data_dict = build_data_dictionary(data_file, has_header, delimiter)
     new_config = Config(delimiter=delimiter)
     for column in data_dict:
-        column_config = get_best_column_config_for_column(data_dict[column])
+        column_config = get_best_column_config_for_column(data_dict[column], enableOptions=enableOptions)
         if column_config is None:
             continue
         new_config.add_column_config(column, column_config)
@@ -56,13 +56,14 @@ def build_data_dictionary(data_file, has_header, delimiter):
     return data_dict
 
 
-def get_best_column_config_for_column(column_values):
+def get_best_column_config_for_column(column_values, enableOptions=True):
     if len(column_values) == 0:
         return
     column_config = get_date_time_config_if_dates_found(column_values)
     if column_config:
         return column_config
-    column_config = get_options_config_if_fewer_than_five_hundred(column_values)
+    if enableOptions:
+        column_config = get_options_config_if_fewer_than_five_hundred(column_values)
     if column_config:
         return column_config
     return get_default_custom_column_config(column_values)
