@@ -1,4 +1,5 @@
 import csv
+import os
 import dateutil.parser as date_parser
 from .config import Config
 import logging
@@ -12,7 +13,14 @@ def generate_yaml_config(data_file, has_header, delimiter):
         if column_config is None:
             continue
         new_config.add_column_config(column, column_config)
-    config_file_name = 'generated-{}-config.yml'.format(data_file)
+    if os.path.dirname(data_file) != '':
+        data_file_path = os.path.dirname(data_file) + '/'
+        print(f'data_file_path: {data_file_path}')
+        file_base_name = os.path.splitext(os.path.basename(data_file))[0]
+        config_file_name = '{}generated-{}-config.yml'.format(data_file_path, file_base_name)
+    else:
+        config_file_name = 'generated-{}-config.yml'.format(data_file)
+    get_logger().info(f'Saving generated config file to: {config_file_name}')
     new_config.save_config(save_name=config_file_name)
 
 
