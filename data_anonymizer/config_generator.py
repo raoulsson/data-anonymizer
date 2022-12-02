@@ -15,7 +15,6 @@ def generate_yaml_config(data_file, has_header, delimiter):
         new_config.add_column_config(column, column_config)
     if os.path.dirname(data_file) != '':
         data_file_path = os.path.dirname(data_file) + '/'
-        print(f'data_file_path: {data_file_path}')
         file_base_name = os.path.splitext(os.path.basename(data_file))[0]
         config_file_name = '{}generated-{}-config.yml'.format(data_file_path, file_base_name)
     else:
