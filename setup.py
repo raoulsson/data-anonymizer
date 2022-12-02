@@ -21,6 +21,7 @@ setuptools.setup(
         'faker',
         'ruamel.yaml',
         'xxhash',
+        'python-dateutil',
     ],
     classifiers=[
         "Programming Language :: Python :: 3",
