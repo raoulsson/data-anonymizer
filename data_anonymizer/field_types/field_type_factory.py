@@ -2,6 +2,7 @@ import logging
 
 from .city import City
 from .company import Company
+from .country import Country
 from .currency_symbol import CurrencySymbol
 from .custom import Custom
 from .custom_address import CustomAddress
@@ -51,6 +52,7 @@ class FieldTypeFactory:
         'ssn': SSN,
         'street_address': StreetAddress,
         'zip': Zip,
+        'country': Country,
         'company': Company,
         'job': Job,
         'currency_symbol': CurrencySymbol,

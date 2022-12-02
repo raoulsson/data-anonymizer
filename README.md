@@ -340,6 +340,12 @@ Generate a valid-looking ZIP code.
 
 ---
 
+### country
+
+Generate a country name (standard provider from Faker lib)
+
+---
+
 ### company
 
 Generate a company name (standard provider from Faker lib)
