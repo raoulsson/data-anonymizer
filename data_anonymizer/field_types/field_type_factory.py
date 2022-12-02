@@ -2,7 +2,7 @@ import logging
 
 from .city import City
 from .company import Company
-from .currency import Currency
+from .currency_symbol import CurrencySymbol
 from .custom import Custom
 from .custom_address import CustomAddress
 from .custom_name import CustomName
@@ -53,7 +53,7 @@ class FieldTypeFactory:
         'zip': Zip,
         'company': Company,
         'job': Job,
-        'currency': Currency,
+        'currency_symbol': CurrencySymbol,
         'iban': IBAN,
         'phone_number': PhoneNumber,
         'file_name': FileName,

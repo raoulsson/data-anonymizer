@@ -352,7 +352,7 @@ Generate a job title (standard provider from Faker lib)
 
 ---
 
-### currency
+### currency_symbol
 
 Generate a currency three-letter symbol (standard provider from Faker lib)
 
