@@ -375,6 +375,7 @@ Generate a phone number (standard provider from Faker lib)
 Generate a file name with extension (standard provider from Faker lib)
 
 ---
+## Extras
 
 ### Encoding
 
@@ -383,3 +384,22 @@ Note that most values are created based on the encoding. Default is en_US. Curre
     FakerSingleton(locale=['fr_CH'])
 
 before the app is invoked. (Not tested)
+
+### Custom Providers
+
+You can add your own providers or community providers dynamically. Here vehicle-provider from https://pypi.org/project/faker-vehicle/
+
+    from faker_vehicle import VehicleProvider
+
+    instance = FakerSingleton(locale=['de_CH'])
+
+    instance.add_provider(VehicleProvider)
+
+    # Specify those methods you want to use in your config.yaml under type:...
+    FieldTypeFactory.add_user_type({"type": "vehicle_make"})
+    FieldTypeFactory.add_user_type({"type": "vehicle_make_model"})
+    FieldTypeFactory.add_user_type({"type": "vehicle_year_make_model"})
+    FieldTypeFactory.add_user_type({"type": "machine_category"})
+    FieldTypeFactory.add_user_type({"type": "machine_model"})
+    FieldTypeFactory.add_user_type({"type": "machine_make"})
+    FieldTypeFactory.add_user_type({"type": "machine_make_model"})

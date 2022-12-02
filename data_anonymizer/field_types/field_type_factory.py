@@ -1,3 +1,5 @@
+import logging
+
 from .city import City
 from .company import Company
 from .currency import Currency
@@ -21,7 +23,12 @@ from .phone_number import PhoneNumber
 from .safe_harbor_age import SafeHarborAge
 from .ssn import SSN
 from .street_address import StreetAddress
+from .user_type import UserType
 from .zip import Zip
+
+
+def get_logger():
+    return logging.getLogger(__file__)
 
 
 class FieldTypeFactory:
@@ -52,6 +59,8 @@ class FieldTypeFactory:
         'file_name': FileName,
     }
 
+    USER_TYPES = {}
+
     @staticmethod
     def get_type(type_config):
         if not isinstance(type_config, dict):
@@ -60,6 +69,20 @@ class FieldTypeFactory:
             raise ValueError('Must supply field type for column configuration')
         type_value = type_config['type'].lower()
         field_type_class = FieldTypeFactory.ACCEPTED_TYPES.get(type_value)
+        user_type_class = FieldTypeFactory.USER_TYPES.get(type_value)
         if field_type_class is None:
+            if user_type_class is not None:
+                return user_type_class(type_config_dict=None, user_type_method=type_value)
             raise ValueError('Field type ' + type_config['type'] + ' not accepted.')
         return field_type_class(type_config)
+
+    @staticmethod
+    def add_user_type(type_config):
+        if not isinstance(type_config, dict):
+            raise ValueError('Column type configuration must be a dictionary')
+        if not type_config.get('type'):
+            raise ValueError('Must supply field type for column configuration')
+        type_value = type_config['type'].lower()
+        get_logger().info(f'Adding user type UserType with method name mapping to: {type_value}')
+        # the key will be used as the method later on.
+        FieldTypeFactory.USER_TYPES[type_value] = UserType
