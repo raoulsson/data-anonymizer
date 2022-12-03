@@ -407,3 +407,28 @@ You can add your own providers or community providers dynamically. Here vehicle-
     FieldTypeFactory.add_user_type({"type": "machine_category"}) 
     FieldTypeFactory.add_user_type({"type": "machine_make_model"})
     ...
+
+### User Callback
+
+You can implement a subclass of UserCallback to tweak the result fo the anonymization. An example is available that removes newlines of any generated output before adding it to the anonymized csv file. For example, full_address type yields that behaviour and can thus be eliminated. You are also given the column type, so you can implement different strategies depending on this information.
+
+Example:
+
+    user_callback = StripNewlinesCallBack()
+    
+    anonymize(config=config, in_filename=inFile, out_filename=outFile, has_header=hasHeader, user_callback=user_callback)
+
+with the implementation of StripNewlinesCallBack:
+
+    class StripNewlinesCallBack(UserCallback, ABC):
+
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+
+        def handleResult(self, column_type: str, supplied_value: str, anonymized_value: str) -> str:
+            return anonymized_value.replace("\r", "").replace(os.linesep, "")
+
+
+
+
+   

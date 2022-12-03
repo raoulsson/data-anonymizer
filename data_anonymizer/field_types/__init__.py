@@ -2,6 +2,7 @@ import logging
 import xxhash
 import faker
 from .decorators.text_formatter import apply_formatting_options
+from data_anonymizer.user.user_callback import UserCallback
 
 
 class BaseFieldType:
@@ -23,7 +24,7 @@ class BaseFieldType:
         seed = BaseFieldType.generate_seed(key, field_value)
         faker.Faker.seed(seed)
 
-    def generate_obfuscated_value(self, key, value):
+    def generate_obfuscated_value(self, key, value, *args, **kwargs):
         raise NotImplementedError
 
 

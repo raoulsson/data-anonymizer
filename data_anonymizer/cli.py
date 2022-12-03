@@ -7,12 +7,12 @@ import logging
 from data_anonymizer.config import Config
 from data_anonymizer.field_types.field_type_factory import FieldTypeFactory
 from data_anonymizer.config_generator import generate_yaml_config
-
+from data_anonymizer.user.user_callback import UserCallback
 
 DEFAULT_KEY_FILE = 'anonymizer.key'
 
 
-def anonymize(config, in_filename, out_filename, has_header):
+def anonymize(config, in_filename, out_filename, has_header, user_callback: UserCallback = None):
     with open(in_filename) as in_file:
         with open(out_filename, 'w') as out_file:
             if has_header:
@@ -29,7 +29,9 @@ def anonymize(config, in_filename, out_filename, has_header):
                     type_config_dict = config.columns_to_anonymize[column_name]
                     field_type = FieldTypeFactory.get_type(type_config_dict)
                     if field_type is not None and row[column_name] is not None and row[column_name] != '':
-                        row[column_name] = field_type.generate_obfuscated_value(config.secret_key, row[column_name])
+                        row[column_name] = field_type.generate_obfuscated_value(config.secret_key,
+                                                                                row[column_name],
+                                                                                user_callback)
                 writer.writerow(row)
 
 

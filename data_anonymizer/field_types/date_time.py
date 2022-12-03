@@ -2,6 +2,8 @@ import dateutil.parser as date_parser
 from datetime import datetime
 from . import BaseFieldType
 from .decorators import apply_formatting_options
+from data_anonymizer.user.user_callback import UserCallback
+from .decorators.apply_user_callback import apply_user_callback
 
 
 class DateTimeField(BaseFieldType):
@@ -27,7 +29,8 @@ class DateTimeField(BaseFieldType):
         self.range_end_date = range_end_date
 
     @apply_formatting_options
-    def generate_obfuscated_value(self, key, value):
+    @apply_user_callback
+    def generate_obfuscated_value(self, key, value, *args, **kwargs):
         self.seed_faker(key, value)
         generated_date = self.faker.date_time_between_dates(self.range_start_date, self.range_end_date)
         if self.preserve_year:

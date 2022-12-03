@@ -1,8 +1,12 @@
 from . import BaseFieldType
+from data_anonymizer.user.user_callback import UserCallback
+from .decorators.apply_user_callback import apply_user_callback
 
 
 class IntRange(BaseFieldType):
-    def generate_obfuscated_value(self, key, value):
+
+    @apply_user_callback
+    def generate_obfuscated_value(self, key, value, *args, **kwargs):
         self.seed_faker(key, value)
         if self.type_config_dict.get('start') is None:
             raise ValueError('"start" must be defined in config for IntRange column types.')

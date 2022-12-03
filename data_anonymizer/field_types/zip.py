@@ -1,4 +1,6 @@
 from . import BaseFieldType
+from data_anonymizer.user.user_callback import UserCallback
+from .decorators.apply_user_callback import apply_user_callback
 
 
 class Zip(BaseFieldType):
@@ -44,7 +46,8 @@ class Zip(BaseFieldType):
                     return generated_value
         return generated_value
 
-    def generate_obfuscated_value(self, key, value):
+    @apply_user_callback
+    def generate_obfuscated_value(self, key, value, *args, **kwargs):
         self.seed_faker(key, value)
         mask = self.type_config_dict.get('mask')
         if mask is not None:

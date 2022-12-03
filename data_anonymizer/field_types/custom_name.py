@@ -1,5 +1,7 @@
 from . import BaseFieldType
 from .decorators import apply_formatting_options
+from data_anonymizer.user.user_callback import UserCallback
+from .decorators.apply_user_callback import apply_user_callback
 
 
 class CustomName(BaseFieldType):
@@ -8,7 +10,8 @@ class CustomName(BaseFieldType):
         self.format_string = type_config_dict.get('format')
 
     @apply_formatting_options
-    def generate_obfuscated_value(self, key, value):
+    @apply_user_callback
+    def generate_obfuscated_value(self, key, value, *args, **kwargs):
         self.seed_faker(key, value)
         if not self.format_string:
             return self.faker.name()

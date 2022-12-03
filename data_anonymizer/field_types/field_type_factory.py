@@ -74,7 +74,7 @@ class FieldTypeFactory:
         user_type_class = FieldTypeFactory.USER_TYPES.get(type_value)
         if field_type_class is None:
             if user_type_class is not None:
-                return user_type_class(type_config_dict=None, user_type_method=type_value)
+                return user_type_class(type_config)
             raise ValueError('Field type ' + type_config['type'] + ' not accepted.')
         return field_type_class(type_config)
 
