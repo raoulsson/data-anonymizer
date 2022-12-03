@@ -389,7 +389,7 @@ Note that most values are created based on the encoding. Default is en_US. Curre
 
     FakerSingleton(locale=['fr_CH'])
 
-before the app is invoked. (Not tested)
+before the app is invoked. 
 
 ### Custom Providers
 
@@ -403,9 +403,7 @@ You can add your own providers or community providers dynamically. Here vehicle-
 
     # Specify those methods you want to use in your config.yaml under type:...
     FieldTypeFactory.add_user_type({"type": "vehicle_make"})
-    FieldTypeFactory.add_user_type({"type": "vehicle_make_model"})
     FieldTypeFactory.add_user_type({"type": "vehicle_year_make_model"})
-    FieldTypeFactory.add_user_type({"type": "machine_category"})
-    FieldTypeFactory.add_user_type({"type": "machine_model"})
-    FieldTypeFactory.add_user_type({"type": "machine_make"})
+    FieldTypeFactory.add_user_type({"type": "machine_category"}) 
     FieldTypeFactory.add_user_type({"type": "machine_make_model"})
+    ...
